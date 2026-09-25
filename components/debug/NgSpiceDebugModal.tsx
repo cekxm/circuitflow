@@ -74,9 +74,10 @@ export const NgSpiceDebugModal: React.FC<NgSpiceDebugModalProps> = ({ isOpen, on
 
       setLogs(prev => [...prev, 'Loading NGSPICE engine...']);
       
+      const spiceBaseUrl = `${import.meta.env.BASE_URL}spice/`;
       const [scriptRes, wasmRes] = await Promise.all([
-          fetch('/spice/ngspice.js'),
-          fetch('/spice/ngspice.wasm')
+          fetch(`${spiceBaseUrl}ngspice.js`),
+          fetch(`${spiceBaseUrl}ngspice.wasm`)
       ]);
 
       if (!scriptRes.ok) throw new Error(`Failed to load ngspice.js: ${scriptRes.status}`);
